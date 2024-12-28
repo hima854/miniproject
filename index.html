@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetic Retinopathy Prediction</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Diabetic Retinopathy Prediction</h1>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="about-section">
+
+                <h2>Disease</h2>
+                <p>Diabetic retinopathy (DR) is the leading cause of preventable blindness. Of working-age Americans
+                    diagnosed with Diabetes Mellitus, it is estimated that about 1/3 have diabetic retinopathy (DR) and
+                    4.4% have vision threatening retinopathy.</p>
+
+                <h2>Risk Factors</h2>
+                <p>Independent risk factors for DR included diabetes duration, hemoglobin A1c, serum glucose, systolic
+                    blood pressure, and Indian ethnicity based on the Singapore Eye Disease Study. Duration of
+                    diabetes is a major risk factor, and is the main criteria utilized to decide when to begin DR
+                    screening. After 5 years, approximately 25% of type 1 patients will have retinopathy. After 10
+                    years, almost 60% will have retinopathy, and after 15 years, 80% will have retinopathy.
+                    Proliferative diabetic retinopathy was present in approximately 50% of type 1 patients who had the
+                    disease for 20 years. In the Los Angeles Latino Eye Study (LALES) and in Proyecto VER (Vision,
+                    Evaluation and Research), 18% of participants with diabetes of more than 15 years’ duration had PDR,
+                    and there was no difference in the percentage with PDR between those with type 1 and type 2
+                    diabetes.</p>
+
+                <h2>About Diabetic Retinopathy</h2>
+                <p>
+                    Diabetic retinopathy (DR) is the leading cause of preventable blindness. Of working-age Americans
+                    diagnosed with Diabetes Mellitus, it is estimated that about 1/3 have diabetic retinopathy (DR) and
+                    4.4% have vision-threatening retinopathy.
+                </p>
+                <p>
+                    Independent risk factors for DR included diabetes duration, hemoglobin A1c, serum glucose, systolic
+                    blood pressure, and Indian ethnicity based on the Singapore Eye Disease Study.
+                </p>
+                <p>
+                    Regular eye exams are important for detecting diabetic retinopathy early when it's most treatable.
+                </p>
+            </section>
+
+            <div class="slideshow-container">
+
+                <div class="mySlides fade">
+                    <img src="static/images/img1.jpg" style="width:100%">
+                    <div class="text">Diabetic Retinopathy</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="static/images/img2.png" style="width:100%">
+                    <div class="text">Diabetic Retinopathy</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="static/images/img3.jpg" style="width:100%">
+                    <div class="text">Diabetic Retinopathy</div>
+                </div>
+
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br>
+
+            <!-- The dots/circles -->
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div><br><br>
+
+            <section class="prediction-section">
+                <h2>Predict Diabetic Retinopathy</h2>
+
+
+                <p>Upload an eye image to predict the presence and severity of diabetic retinopathy.</p>
+                <center>
+                    <div class="image-preview">
+                        <img id="preview-image" src="#" alt="Image Preview">
+                    </div>
+
+                    <form action="/predict" method="post" enctype="multipart/form-data">
+                        <label for="input-image" class="upload-btn">Choose Image</label>
+                        <input type="file" id="input-image" class="file-input" name="input-image" accept="image/*"
+                            onchange="previewImage(event)" required>
+                        <button type="submit" class="predict">Predict</button>
+                    </form><br><br>
+                </center>
+
+                <div class="prediction-boxes">
+                    <div class="prediction-box {% if highlighted_box == 'class1' %}highlight{% endif %}" id="class1">
+                        Proliferative DR</div>
+                    <div class="prediction-box {% if highlighted_box == 'class2' %}highlight{% endif %}" id="class2">
+                        Severe </div>
+                    <div class="prediction-box {% if highlighted_box == 'class3' %}highlight{% endif %}" id="class3">
+                        Mild DR</div>
+                    <div class="prediction-box {% if highlighted_box == 'class4' %}highlight{% endif %}" id="class4">
+                        Moderate DR</div>
+                    <div class="prediction-box {% if highlighted_box == 'class5' %}highlight{% endif %}" id="class5">
+                        No DR</div>
+                </div>
+            </section>
+
+            <section class="schedule-section">
+                <h2>Schedule for Diabetic Retinopathy Examination</h2>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Classification</th>
+                            <th>Re-examination or Next Screening Schedule</th>
+                            <th>Referral to Ophthalmologist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>No apparent DR, mild nonproliferative DR, and no DME</td>
+                            <td>Re-examination in 1–2 yrs</td>
+                            <td>Referral not required</td>
+                        </tr>
+                        <tr>
+                            <td>Mild nonproliferative DR</td>
+                            <td>6–12 months</td>
+                            <td>Referral not required</td>
+                        </tr>
+                        <tr>
+                            <td>Moderate nonproliferative DR</td>
+                            <td>3–6 months</td>
+                            <td>Referral required</td>
+                        </tr>
+                        <tr>
+                            <td>Severe nonproliferative DR</td>
+                            <td>&lt;3 months</td>
+                            <td>Referral required</td>
+                        </tr>
+                        <tr>
+                            <td>Proliferative DR</td>
+                            <td>&lt;1 month</td>
+                            <td>Referral required</td>
+                        </tr>
+                        <tr>
+                            <td>Non–center-involving DME</td>
+                            <td>3 months</td>
+                            <td>Referral required</td>
+                        </tr>
+                        <tr>
+                            <td>Center-involving DME</td>
+                            <td>1 months</td>
+                            <td>Referral required</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="faq-section">
+                <h2>FAQs About Diabetic Retinopathy</h2>
+
+                <button class="accordion">What is diabetic retinopathy?</button>
+                <div class="panel">
+                    <p>Diabetic retinopathy is a diabetes complication that affects the eyes. It's caused by damage to
+                        the blood vessels of the light-sensitive tissue at the back of the eye (retina).</p>
+                </div>
+
+                <button class="accordion">What are the symptoms of diabetic retinopathy?</button>
+                <div class="panel">
+                    <p>Some common symptoms of diabetic retinopathy include blurred vision, fluctuating vision,
+                        impaired color vision, and vision loss.</p>
+                </div>
+
+                <button class="accordion">How is diabetic retinopathy diagnosed?</button>
+                <div class="panel">
+                    <p>Diabetic retinopathy is diagnosed through a comprehensive eye exam that may include visual
+                        acuity testing, dilated eye exam, tonometry, and imaging tests like optical coherence
+                        tomography (OCT).</p>
+                </div>
+
+                <button class="accordion">What are the final stages of diabetic retinopathy?</button>
+                <div class="panel">
+                    <p>Proliferative Diabetic Retinopathy (PDR)
+
+                        In this advanced stage, new blood vessels grow in your retinas and into the gel-like fluid that
+                        fills your eyes. This growth is called neovascularization. These vessels are thin and weak. They
+                        often bleed.</p>
+                </div>
+
+                <button class="accordion">Can diabetic retinopathy be avoided?</button>
+                <div class="panel">
+                    <p>You can reduce your risk of developing diabetic retinopathy, or help stop it getting worse, by
+                        keeping your blood sugar levels, blood pressure and cholesterol levels under control. This can
+                        often be done by making healthy lifestyle choices, although some people will also need to take
+                        medication.</p>
+                </div>
+
+                <button class="accordion">How do you prevent retinopathy?</button>
+                <div class="panel">
+                    <p> You can't always prevent diabetic retinopathy. However, regular eye exams, good control of your
+                        blood sugar and blood pressure, and early intervention for vision problems can help prevent
+                        severe vision loss.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Diabetic Retinopathy Prediction</p>
+        </div>
+    </footer>
+
+  
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var preview = document.getElementById('preview-image');
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
+</body>
+
+</html>
